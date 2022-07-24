@@ -13,11 +13,12 @@ https://docs.djangoproject.com/en/4.0/ref/settings/
 from pathlib import Path
 from dotenv import load_dotenv
 import os
+load_dotenv()
 # https://dev.to/earthcomfy/django-how-to-keep-secrets-safe-with-python-dotenv-5811
 # These codes are used for the ease of deployment
 # dotenv_path = os.path.join(os.path.dirname(__file__), '.env')
 # load_dotenv(dotenv_path)
-load_dotenv()
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -45,6 +46,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'rest_framework',
     'corsheaders',
+    'trasia_watches_store',
 ]
 
 MIDDLEWARE = [
