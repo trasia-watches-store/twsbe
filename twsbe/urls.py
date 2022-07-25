@@ -20,5 +20,5 @@ from trasia_watches_store import views
 urlpatterns = [
     path('admin/', admin.site.urls),
     re_path(r'^watches/$', views.watches_list, name='watches_list'),
-    re_path('^watches/(?P<slug>[-\w]+)/$', views.watches_detail, name='watches_detail'),
+    re_path(r'^watches/(?P<pk>[0-9]+)/$', views.watches_detail, name='watches_detail'),
 ]
