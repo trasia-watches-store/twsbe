@@ -19,6 +19,7 @@ class Watch(models.Model):
     image = models.ImageField("Image", upload_to='images/')
     created_at = models.DateTimeField("Created At", auto_now_add=True)
     updated_at = models.DateTimeField("Updated At", auto_now=True)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
 
     def __str__(self):
         return self.name
