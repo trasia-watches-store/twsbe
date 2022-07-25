@@ -45,8 +45,17 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'rest_framework',
+    'rest_framework.authtoken',
+    'rest_auth',
+    'django.contrib.sites',
+    'allauth',
+    'allauth.account',
+    'allauth.socialaccount',
+    'rest_auth.registration',
     'corsheaders',
     'trasia_watches_store',
+    'users',
+    # 'core'
 ]
 
 MIDDLEWARE = [
@@ -60,7 +69,7 @@ MIDDLEWARE = [
     'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
 ]
-
+# 'DEFAULT_PERMISSION_CLASSES': ['rest_framework.permissions.AllowAny']
 CORS_ORIGIN_ALLOW_ALL = True
 
 ROOT_URLCONF = 'twsbe.urls'
