@@ -54,8 +54,7 @@ INSTALLED_APPS = [
     'rest_auth.registration',
     'corsheaders',
     'trasia_watches_store',
-    'users',
-    # 'core'
+    'users'
 ]
 
 MIDDLEWARE = [

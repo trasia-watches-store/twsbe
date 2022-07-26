@@ -21,5 +21,5 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     re_path(r'^api/watches/$', views.watches_list, name='watches_list'),
     re_path(r'^api/watches/(?P<pk>[0-9]+)$', views.watches_detail, name='watches_detail'),
-    path('api/users/', include('users.urls')),
+    # path('api/users/', include('users.urls')),
 ]
