@@ -14,11 +14,12 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path, re_path
+from django.urls import path, re_path, include
 from trasia_watches_store import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     re_path(r'^api/watches/$', views.watches_list, name='watches_list'),
     re_path(r'^api/watches/(?P<pk>[0-9]+)$', views.watches_detail, name='watches_detail'),
+    path('api/users/', include('users.urls')),
 ]
