@@ -1,7 +1,20 @@
 from rest_framework import serializers
 from .models import Watch, WatchesPicture
 
+#################################################################################
+# class MyModelSerializer(serializers.ModelSerializer):
+
+#     creator = serializers.ReadOnlyField(source='creator.username')
+#     creator_id = serializers.ReadOnlyField(source='creator.id')
+#     image_url = serializers.ImageField(required=False)
+
+#     class Meta:
+#         model = MyModel
+#         fields = ['id', 'creator', 'creator_id', 'title', 'description', 'image_url']
+
+#################################################################################
 class WatchSerializer(serializers.ModelSerializer):
+    # wimage = serializers.ImageField(required=False)
     class Meta:
         model = Watch
         # fields = '__all__'

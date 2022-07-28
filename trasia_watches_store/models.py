@@ -1,9 +1,19 @@
 from django.db import models
 
 # Create your models here.
-from django.db import models
+# Image tester
+# def upload_to(instance, filename):
+#     return 'images/{filename}'.format(filename=filename)
 
-# Create your models here.
+# class MyModel(models.Model):
+#     creator = models.ForeignKey(
+#         'users.CustomUser', on_delete=models.CASCADE, related_name="listings")
+#     title = models.CharField(
+#         max_length=80, blank=False, null=False)
+#     description = models.TextField()
+#     image_url = models.ImageField(upload_to=upload_to, blank=True, null=True)
+
+###############################################################################
 class Watch(models.Model):
     name = models.CharField("Name", max_length=255)
     type = models.CharField("Type", max_length=255)
@@ -18,6 +28,7 @@ class Watch(models.Model):
     # case_description = models.TextField("Case Description")
     # dial_description = models.TextField("Dial Description")
     # movement_description = models.TextField("Movement Description")
+    # wimage = models.ImageField("Watch Image", upload_to=upload_to, null=True, blank=True)
     created_at = models.DateTimeField("Created At", auto_now_add=True)
     updated_at = models.DateTimeField("Updated At", auto_now=True)
     users = models.ManyToManyField("users.CustomUser", related_name="watches")
