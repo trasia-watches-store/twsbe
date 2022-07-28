@@ -1,4 +1,5 @@
 from django.urls import re_path, path, include
+from . import views
 
 urlpatterns = [
     # path('auth/', include('rest_auth.urls')),
