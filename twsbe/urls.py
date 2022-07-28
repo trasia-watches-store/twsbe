@@ -16,6 +16,8 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, re_path, include
 from trasia_watches_store import views
+from django.conf import settings
+from django.conf.urls.static import static
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -25,3 +27,6 @@ urlpatterns = [
     # re_path(r'^api/watches/pics/(?P<pk>[0-9]+)$', views.pics_detail, name='pics_detail'),
     path('api/users/', include('users.urls')),
 ]
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL,
+                          document_root=settings.MEDIA_ROOT)

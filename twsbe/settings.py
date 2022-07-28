@@ -145,6 +145,10 @@ REST_FRAMEWORK = {
         # 'dj_rest_auth.jwt_auth.JWTCookieAuthentication'
     ],
     'DATETIME_FORMAT': '%d/%m/%Y %I:%M%P',
+    'DEFAULT_PARSER_CLASSES': (
+        'rest_framework.parsers.FormParser',
+        'rest_framework.parsers.MultiPartParser'
+     )
 }
 
 

@@ -50,7 +50,7 @@ def pics_list(request):
 # def pics_list(request, cat_id):
     elif request.method == 'POST':
         # photo-file will be the "name" attribute on the <input>
-        photo_file = request.FILES.get('photo-file', None)
+        photo_file = request.FILES.get('image', None)
         if photo_file:
             s3 = boto3.client('s3')
             # build a unique filename keeping the image's original extension
