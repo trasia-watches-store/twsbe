@@ -18,9 +18,16 @@ class Watch(models.Model):
     # case_description = models.TextField("Case Description")
     # dial_description = models.TextField("Dial Description")
     # movement_description = models.TextField("Movement Description")
-    image = models.ImageField("Image", upload_to='images/')
     created_at = models.DateTimeField("Created At", auto_now_add=True)
     updated_at = models.DateTimeField("Updated At", auto_now=True)
+    users = models.ManyToManyField("users.CustomUser", related_name="watches")
 
     def __str__(self):
         return self.name
+
+class WatchesPicture(models.Model):
+    watch = models.ForeignKey(Watch, on_delete=models.CASCADE)
+    url = models.CharField(max_length=255)
+
+    def __str__(self):
+        return f'Photo for watch_id: {self.watch.id} @{self.url}'
