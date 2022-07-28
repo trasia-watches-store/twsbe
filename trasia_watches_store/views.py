@@ -7,8 +7,22 @@ import boto3
 import uuid
 from .models import Watch, WatchesPicture
 from .serializers import *
+from rest_framework import permissions, viewsets
+from rest_framework.parsers import MultiPartParser, FormParser
 
 # Create your views here.
+# image tester
+# class MyModelViewSet(viewsets.ModelViewSet):
+#     queryset = MyModel.objects.order_by('-title')
+#     serializer_class = MyModelSerializer
+#     parser_classes = (MultiPartParser, FormParser)
+#     permission_classes = [
+#         permissions.IsAuthenticatedOrReadOnly]
+
+#     def perform_create(self, serializer):
+#         serializer.save(creator=self.request.user)
+
+##################################################################################
 @api_view(['GET', 'POST'])
 def watches_list(request):
     if request.method == 'GET':

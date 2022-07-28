@@ -4,3 +4,4 @@ from .models import Watch, WatchesPicture
 # Register your models here.
 admin.site.register(Watch)
 admin.site.register(WatchesPicture)
+# admin.site.register(MyModel)
