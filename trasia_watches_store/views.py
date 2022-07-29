@@ -49,8 +49,10 @@ def watches_list(request):
         return Response(serializer.data)
     elif request.method == 'POST':
         serializer = WatchSerializer(data=request.data)
+        print(request.data)
         if serializer.is_valid():
             serializer.save()
+            print(serializer)
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
