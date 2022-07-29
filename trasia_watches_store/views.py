@@ -1,10 +1,12 @@
 from django.shortcuts import render
+import pkg_resources
 from rest_framework import status
 from rest_framework.response import Response
 from rest_framework.decorators import api_view, action
 import os
 import boto3
 import uuid
+import asyncio
 from .models import Watch, WatchesPicture, MyModel
 from .serializers import *
 from rest_framework import permissions, viewsets
@@ -48,29 +50,41 @@ def watches_list(request):
         serializer = WatchSerializer(watches, context={'request': request}, many=True)
         return Response(serializer.data)
     elif request.method == 'POST':
-        photo_file = request.FILES.get('wimage', None)
-
-        if photo_file:
-            s3 = boto3.client('s3')
-            print(f's3: {s3}')
-            # build a unique filename keeping the image's original extension
-            key = uuid.uuid4().hex[:6] + photo_file.name[photo_file.name.rfind('.'):]
-            print(f'key: {key}')
-            try:
-                bucket = os.environ['S3_BUCKET']
-                print(f'bucket: {bucket}')
-                s3.upload_fileobj(photo_file, bucket, key)
-                url = f"{os.environ['S3_BASE_URL']}{bucket}/{key}"
-                print(url)
-            except:
-                print('An error occurred uploading file to S3')
+        # photo_file = request.FILES.get('image', None)
+        # print(f'photo_file: {photo_file}')
+        
 
         serializer = WatchSerializer(data=request.data)
-        print(photo_file)
         print(request.data)
         if serializer.is_valid():
             serializer.save()
-            print(serializer)
+            dict = serializer.data
+            print(dict['pk'])
+
+            # if photo_file:
+            # s3 = boto3.client('s3')
+            # print(f's3: {s3}')
+            # # build a unique filename keeping the image's original extension
+            # key = uuid.uuid4().hex[:6] + photo_file.name[photo_file.name.rfind('.'):]
+            # print(f'key: {key}')
+        #     try:
+        #         bucket = os.environ['S3_BUCKET']
+        #         print(f'bucket: {bucket}')
+        #         s3.upload_fileobj(photo_file, bucket, key)
+        #         url = f"{os.environ['S3_BASE_URL']}{bucket}/{key}"
+        #         print(url)
+        # WatchesPicture.objects.create(url=url, cat_id=cat_id)
+            # url='https://s3.ap-southeast-2.amazonaws.com/watchespics/0ebd2b.jpeg'
+            # print(f'url: {url}')
+            # pic = WatchesPicture.objects.create(url=url, watch_id=dict['pk'])
+            # print(f'pic: {pic}')
+            # picSerializer = WatchesPictureSerializer(pic)
+            # print(f'picSerializer.data: {picSerializer.data}')
+            # if picSerializer.is_valid():
+            #     picSerializer.save()
+            #     return print(f'picSerializer: {picSerializer}')
+            # else:
+            #     return print('An error occurred uploading file to S3')
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
