@@ -48,7 +48,25 @@ def watches_list(request):
         serializer = WatchSerializer(watches, context={'request': request}, many=True)
         return Response(serializer.data)
     elif request.method == 'POST':
+        photo_file = request.FILES.get('wimage', None)
+
+        if photo_file:
+            s3 = boto3.client('s3')
+            print(f's3: {s3}')
+            # build a unique filename keeping the image's original extension
+            key = uuid.uuid4().hex[:6] + photo_file.name[photo_file.name.rfind('.'):]
+            print(f'key: {key}')
+            try:
+                bucket = os.environ['S3_BUCKET']
+                print(f'bucket: {bucket}')
+                s3.upload_fileobj(photo_file, bucket, key)
+                url = f"{os.environ['S3_BASE_URL']}{bucket}/{key}"
+                print(url)
+            except:
+                print('An error occurred uploading file to S3')
+
         serializer = WatchSerializer(data=request.data)
+        print(photo_file)
         print(request.data)
         if serializer.is_valid():
             serializer.save()
