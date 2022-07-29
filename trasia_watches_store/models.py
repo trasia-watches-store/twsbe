@@ -1,18 +1,17 @@
 from django.db import models
+from users.models import CustomUser
 
 # Create your models here.
 # Image tester
-# def upload_to(instance, filename):
-#     return 'images/{filename}'.format(filename=filename)
+def upload_to(instance, filename):
+    return 'images/{filename}'.format(filename=filename)
 
-# class MyModel(models.Model):
-#     creator = models.ForeignKey(
-#         'users.CustomUser', on_delete=models.CASCADE, related_name="listings")
-#     title = models.CharField(
-#         max_length=80, blank=False, null=False)
-#     description = models.TextField()
-#     image_url = models.ImageField(upload_to=upload_to, blank=True, null=True)
-
+class MyModel(models.Model):
+    # creator = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
+    title = models.CharField(max_length=80, blank=False, null=False)
+    description = models.TextField()
+    image_url = models.ImageField(upload_to=upload_to, blank=True, null=True)
+    creator = models.ManyToManyField("users.CustomUser")
 ###############################################################################
 class Watch(models.Model):
     name = models.CharField("Name", max_length=255)
@@ -28,7 +27,7 @@ class Watch(models.Model):
     # case_description = models.TextField("Case Description")
     # dial_description = models.TextField("Dial Description")
     # movement_description = models.TextField("Movement Description")
-    # wimage = models.ImageField("Watch Image", upload_to=upload_to, null=True, blank=True)
+    wimage = models.ImageField("Watch Image", upload_to=upload_to, null=True, blank=True)
     created_at = models.DateTimeField("Created At", auto_now_add=True)
     updated_at = models.DateTimeField("Updated At", auto_now=True)
     users = models.ManyToManyField("users.CustomUser", related_name="watches")

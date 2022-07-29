@@ -1,26 +1,44 @@
 from django.shortcuts import render
 from rest_framework import status
 from rest_framework.response import Response
-from rest_framework.decorators import api_view
+from rest_framework.decorators import api_view, action
 import os
 import boto3
 import uuid
-from .models import Watch, WatchesPicture
+from .models import Watch, WatchesPicture, MyModel
 from .serializers import *
 from rest_framework import permissions, viewsets
 from rest_framework.parsers import MultiPartParser, FormParser
 
 # Create your views here.
 # image tester
-# class MyModelViewSet(viewsets.ModelViewSet):
-#     queryset = MyModel.objects.order_by('-title')
-#     serializer_class = MyModelSerializer
-#     parser_classes = (MultiPartParser, FormParser)
-#     permission_classes = [
-#         permissions.IsAuthenticatedOrReadOnly]
+# @api_view(['GET', 'POST'])
+# def upload(request):
+    # if request.method == 'POST':    
+    #     # parser_classes = [MultiPartParser, FormParser]
+    #     # photo_file = request.FILES.get('file')
+    #     # print(photo_file)
+    #     return Response(photo_file, status=status.HTTP_200_OK)
 
-#     def perform_create(self, serializer):
-#         serializer.save(creator=self.request.user)
+# class upload(viewsets.ModelViewSet):
+#     serializer_class = ImageTestSerializer
+#     parser_classes = [MultiPartParser, FormParser]
+
+#     def upload(self, request, *args, **kwargs):
+#         serializer = self.get_serializer(data=request.data)
+#         serializer.is_valid(raise_exception=True)
+#         serializer.save()
+#         return Response(serializer.data, status=status.HTTP_201_CREATED)
+
+class MyModelViewSet(viewsets.ModelViewSet):
+    queryset = MyModel.objects.order_by('-title')
+    serializer_class = MyModelSerializer
+    parser_classes = (MultiPartParser, FormParser)
+
+    @action(detail=True, methods=['post'])
+    def perform_create(self, serializer):
+        serializer.save()
+        return Response({'status': 'password set'})
 
 ##################################################################################
 @api_view(['GET', 'POST'])

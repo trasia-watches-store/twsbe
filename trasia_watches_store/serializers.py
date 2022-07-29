@@ -1,24 +1,23 @@
 from rest_framework import serializers
-from .models import Watch, WatchesPicture
+from .models import Watch, WatchesPicture, MyModel
 
 #################################################################################
-# class MyModelSerializer(serializers.ModelSerializer):
+class MyModelSerializer(serializers.ModelSerializer):
 
-#     creator = serializers.ReadOnlyField(source='creator.username')
-#     creator_id = serializers.ReadOnlyField(source='creator.id')
-#     image_url = serializers.ImageField(required=False)
+    # creator = serializers.ReadOnlyField(source='creator.username')
+    # creator_id = serializers.ReadOnlyField(source='creator.id')
+    image_url = serializers.ImageField(required=False)
 
-#     class Meta:
-#         model = MyModel
-#         fields = ['id', 'creator', 'creator_id', 'title', 'description', 'image_url']
-
+    class Meta:
+        model = MyModel
+        fields = ['id', 'title', 'description', 'image_url']
 #################################################################################
 class WatchSerializer(serializers.ModelSerializer):
-    # wimage = serializers.ImageField(required=False)
+    wimage = serializers.ImageField(required=False)
     class Meta:
         model = Watch
         # fields = '__all__'
-        fields = ('pk', 'name', 'type', 'created_at', 'updated_at')
+        fields = ('pk', 'name', 'type', 'wimage', 'created_at', 'updated_at')
         read_only_fields = ('created_at', 'updated_at')
 
 class WatchesPictureSerializer(serializers.ModelSerializer):
