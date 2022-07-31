@@ -5,3 +5,4 @@ dict = {
     "name": "Watch",
 }
 print(dict['name'])
+print(type(dict['name']) == str)

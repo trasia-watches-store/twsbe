@@ -60,6 +60,7 @@ def watches_list(request):
             serializer.save()
             dict = serializer.data
             print(dict['pk'])
+            print(dict)
 
             # if photo_file:
             # s3 = boto3.client('s3')
@@ -92,11 +93,13 @@ def watches_list(request):
 def watches_detail(request, pk):
     try:
         watch = Watch.objects.get(pk=pk)
+        print(f'watch.wimage: {watch.wimage}')
     except Watch.DoesNotExist:
         return Response(status=status.HTTP_404_NOT_FOUND)
 
     if request.method == 'PUT':
         serializer = WatchSerializer(watch, data=request.data, context={'request': request})
+        print(f'request.data: {request.data}')
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data, status=status.HTTP_204_NO_CONTENT)
