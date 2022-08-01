@@ -24,7 +24,7 @@ urlpatterns = [
     # path('api/upload/', views.upload, name='upload'),
     re_path(r'^api/watches/$', views.watches_list, name='watches_list'),
     re_path(r'^api/watches/(?P<pk>[0-9]+)$', views.watches_detail, name='watches_detail'),
-    re_path(r'^$', views.MyModelViewSet.perform_create, name='perform_create'),
+    # re_path(r'^$', views.MyModelViewSet.perform_create, name='perform_create'),
     # re_path(r'^api/watches/pics/(?P<pk>[0-9]+)$', views.pics_detail, name='pics_detail'),
     path('api/users/', include('users.urls')),
 ]
