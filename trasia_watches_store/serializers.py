@@ -15,7 +15,7 @@ class MyModelSerializer(serializers.ModelSerializer):
 class WatchSerializer(serializers.ModelSerializer):
     # if type(wimage)  == str:
         # wimage: serializers.ImageField(required=True)
-    wimage = serializers.ImageField(required=False)
+    # wimage = serializers.ImageField(required=False)
     class Meta:
         model = Watch
         fields = ('pk', 'name', 'type', 'wimage', 'created_at', 'updated_at')
