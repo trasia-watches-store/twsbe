@@ -50,41 +50,41 @@ def watches_list(request):
         serializer = WatchSerializer(watches, context={'request': request}, many=True)
         return Response(serializer.data)
     elif request.method == 'POST':
-        photo_file = request.FILES.get('wimage', None)
-        print(f'photo_file: {photo_file}')
-        if photo_file:
-            s3 = boto3.client('s3')
-            print(f's3: {s3}')
-            # build a unique filename keeping the image's original extension
-            key = uuid.uuid4().hex[:6] + photo_file.name[photo_file.name.rfind('.'):]
-            print(f'key: {key}')
-            try:
-                bucket = os.environ['S3_BUCKET']
-                print(f'bucket: {bucket}')
-                s3.upload_fileobj(photo_file, bucket, key)
-                url = f"{os.environ['S3_BASE_URL']}{bucket}/{key}"
-                print(url)
-                request.data['wimage'] = url
-                print(f'request.data.wimage: {request.data["wimage"]}')
-                serializer = WatchSerializer(data=request.data)
-                print(request.data)
-                if serializer.is_valid():
-                    serializer.save()
-                    dict = serializer.data
-                    print(dict['pk'])
-                    print(dict)
-                    return Response(serializer.data, status=status.HTTP_201_CREATED)
-            except:
-                print('An error occurred uploading file to S3')
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+        # photo_file = request.FILES.get('wimage', None)
+        # print(f'photo_file: {photo_file}')
+        # if photo_file:
+        #     s3 = boto3.client('s3')
+        #     print(f's3: {s3}')
+        #     # build a unique filename keeping the image's original extension
+        #     key = uuid.uuid4().hex[:6] + photo_file.name[photo_file.name.rfind('.'):]
+        #     print(f'key: {key}')
+        #     try:
+        #         bucket = os.environ['S3_BUCKET']
+        #         print(f'bucket: {bucket}')
+        #         s3.upload_fileobj(photo_file, bucket, key)
+        #         url = f"{os.environ['S3_BASE_URL']}{bucket}/{key}"
+        #         print(url)
+        #         request.data['wimage'] = url
+        #         print(f'request.data.wimage: {request.data["wimage"]}')
+        #         serializer = WatchSerializer(data=request.data)
+        #         print(request.data)
+        #         if serializer.is_valid():
+        #             serializer.save()
+        #             dict = serializer.data
+        #             print(dict['pk'])
+        #             print(dict)
+        #             return Response(serializer.data, status=status.HTTP_201_CREATED)
+        #     except:
+        #         print('An error occurred uploading file to S3')
+        # return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
-        # serializer = WatchSerializer(data=request.data)
-        # print(request.data)
-        # if serializer.is_valid():
-        #     serializer.save()
-        #     dict = serializer.data
-        #     print(dict['pk'])
-        #     print(dict)
+        serializer = WatchSerializer(data=request.data)
+        print(request.data)
+        if serializer.is_valid():
+            serializer.save()
+            dict = serializer.data
+            print(dict['pk'])
+            print(dict)
 
             # if photo_file:
             # s3 = boto3.client('s3')
@@ -110,8 +110,8 @@ def watches_list(request):
             #     return print(f'picSerializer: {picSerializer}')
             # else:
             #     return print('An error occurred uploading file to S3')
-        #     return Response(serializer.data, status=status.HTTP_201_CREATED)
-        # return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 @api_view(['PUT', 'DELETE'])
 def watches_detail(request, pk):
