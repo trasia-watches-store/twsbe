@@ -11,7 +11,7 @@ from .models import Watch, WatchesPicture, MyModel
 from .serializers import *
 from rest_framework import permissions, viewsets
 from rest_framework.parsers import MultiPartParser, FormParser
-
+# dummy image https://s3.ap-southeast-2.amazonaws.com/watchespics/cffdfa.png
 # Create your views here.
 # image tester
 # @api_view(['GET', 'POST'])
