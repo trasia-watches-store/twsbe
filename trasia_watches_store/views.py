@@ -122,31 +122,31 @@ def watches_detail(request, pk):
         return Response(status=status.HTTP_404_NOT_FOUND)
 
     if request.method == 'PUT':
-        photo_file = request.FILES.get('wimage', None)
-        print(f'photo_file: {photo_file}')
-        if photo_file:
-            s3 = boto3.client('s3')
-            print(f's3: {s3}')
-            # build a unique filename keeping the image's original extension
-            key = uuid.uuid4().hex[:6] + photo_file.name[photo_file.name.rfind('.'):]
-            print(f'key: {key}')
-            try:
-                bucket = os.environ['S3_BUCKET']
-                print(f'bucket: {bucket}')
-                s3.upload_fileobj(photo_file, bucket, key)
-                url = f"{os.environ['S3_BASE_URL']}{bucket}/{key}"
-                print(url)
-                request.data['wimage'] = url
-                print(f'request.data.wimage: {request.data["wimage"]}')
-                serializer = WatchSerializer(watch, data=request.data, context={'request': request})
-                print(f'request.data: {request.data}')
-                if serializer.is_valid():
-                    serializer.save()
-                    return Response(serializer.data, status=status.HTTP_204_NO_CONTENT)
-            except:
-                print('An error occurred uploading file to S3')
-        print(request.data)
-        print(f'request.data.wimage: {request.data["wimage"]}')
+        # photo_file = request.FILES.get('wimage', None)
+        # print(f'photo_file: {photo_file}')
+        # if photo_file:
+        #     s3 = boto3.client('s3')
+        #     print(f's3: {s3}')
+        #     # build a unique filename keeping the image's original extension
+        #     key = uuid.uuid4().hex[:6] + photo_file.name[photo_file.name.rfind('.'):]
+        #     print(f'key: {key}')
+        #     try:
+        #         bucket = os.environ['S3_BUCKET']
+        #         print(f'bucket: {bucket}')
+        #         s3.upload_fileobj(photo_file, bucket, key)
+        #         url = f"{os.environ['S3_BASE_URL']}{bucket}/{key}"
+        #         print(url)
+        #         request.data['wimage'] = url
+        #         print(f'request.data.wimage: {request.data["wimage"]}')
+        #         serializer = WatchSerializer(watch, data=request.data, context={'request': request})
+        #         print(f'request.data: {request.data}')
+        #         if serializer.is_valid():
+        #             serializer.save()
+        #             return Response(serializer.data, status=status.HTTP_204_NO_CONTENT)
+        #     except:
+        #         print('An error occurred uploading file to S3')
+        # print(request.data)
+        # print(f'request.data.wimage: {request.data["wimage"]}')
         serializer = WatchSerializer(watch, data=request.data, context={'request': request})
         print(f'request.data: {request.data}')
         if serializer.is_valid():
