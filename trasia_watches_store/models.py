@@ -14,6 +14,7 @@ class MyModel(models.Model):
     creator = models.ManyToManyField("users.CustomUser")
 ###############################################################################
 class Watch(models.Model):
+    productCode = models.CharField(max_length=80, blank=False, null=False)
     name = models.CharField("Name", max_length=255)
     type = models.CharField("Type", max_length=255)
     features = models.TextField("Features", null=True, blank=True)
