@@ -6,3 +6,6 @@ dict = {
 }
 print(dict['name'])
 print(type(dict['name']) == str)
+t = True
+print(type(t) == bool)
+print(t)
