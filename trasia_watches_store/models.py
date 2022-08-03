@@ -39,7 +39,8 @@ class Watch(models.Model):
 
 class WatchesPicture(models.Model):
     watch = models.ForeignKey(Watch, on_delete=models.CASCADE)
-    url = models.CharField(max_length=255)
+    # url = models.CharField(max_length=255)
+    image = models.ImageField("Photos", upload_to=upload_to, null=True, blank=True)
 
     def __str__(self):
         return f'Photo for watch_id: {self.watch.id} @{self.url}'
