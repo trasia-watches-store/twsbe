@@ -43,4 +43,5 @@ class WatchesPicture(models.Model):
     image = models.ImageField("Photos", upload_to=upload_to, null=True, blank=True)
 
     def __str__(self):
-        return f'Photo for watch_id: {self.watch.id} @{self.url}'
+        # return f'Photo for watch_id: {self.watch.id} @{self.url}'
+        return f'Photo for watch_id: {self.watch.id} @{self.id}'
