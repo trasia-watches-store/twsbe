@@ -79,6 +79,16 @@ def pics_list(request):
         #     except:
         #         print('An error occurred uploading file to S3')
         # return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+@api_view(['PUT', 'DELETE'])
+def pics_detail(request, pk):
+    try:
+        pic = WatchesPicture.objects.get(pk=pk)
+        print(f'pic: {pic}')
+    except WatchesPicture.DoesNotExist:
+        return Response(status=status.HTTP_404_NOT_FOUND)
+    if request.method == 'DELETE':
+        pic.delete()
+        return Response(status=status.HTTP_204_NO_CONTENT)
 
 @api_view(['GET', 'POST']) 
 def watches_list(request):

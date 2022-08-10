@@ -27,6 +27,7 @@ urlpatterns = [
     # re_path(r'^$', views.MyModelViewSet.perform_create, name='perform_create'),
     # re_path(r'^api/watches/(?P<pk>[0-9]+)/pics$', views.pics_list, name='pics_list'),
     re_path(r'^api/watches/pics$', views.pics_list, name='pics_list'),
+    re_path(r'^api/watches/pics/(?P<pk>[0-9]+)$', views.pics_detail, name='pics_detail'),
     path('api/users/', include('users.urls')),
 ]
 if settings.DEBUG:
