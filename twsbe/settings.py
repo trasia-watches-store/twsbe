@@ -9,7 +9,7 @@ https://docs.djangoproject.com/en/4.0/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.0/ref/settings/
 """
-
+# This is the setting before winding back to commit heroku
 from pathlib import Path
 from dotenv import load_dotenv
 import os
@@ -30,6 +30,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = str(os.getenv('SECRET_KEY'))
 
 # SECURITY WARNING: don't run with debug turned on in production!
+# DEBUG = 'TRUE'
 DEBUG = 'RENDER' not in os.environ
 
 ALLOWED_HOSTS = ['https://trasia-watches-store.onrender.com/']
