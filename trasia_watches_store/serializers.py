@@ -18,10 +18,7 @@ class WatchSerializer(serializers.ModelSerializer):
     # wimage = serializers.ImageField(required=False)
     class Meta:
         model = Watch
-        fields = ('pk', 'productCode' ,'name', 'type', 'features', 'price', 'stockNum', 'brand', 'family', 'model', 'limited', 'water_resistance_depth', 'case_description', 'dial_description', 'movement_description', 'wimage', 'created_at', 'updated_at')
-        # fields = ('pk', 'name', 'type', 'features', 'price', 'stockNum', 'brand', 'family', 'model', 'limited', 'water_resistance_depth', 'case_description', 'dial_description', 'movement_description', 'created_at', 'updated_at')
-        # fields = ('pk', 'name', 'type', 'wimage', 'created_at', 'updated_at')
-        # fields = ('pk', 'limited', 'created_at', 'updated_at')
+        fields = ('pk', 'name', 'type', 'wimage', 'created_at', 'updated_at')
         read_only_fields = ('created_at', 'updated_at')
 
 class WatchesPictureSerializer(serializers.ModelSerializer):
