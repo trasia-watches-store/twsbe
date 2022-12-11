@@ -33,8 +33,8 @@ SECRET_KEY = str(os.getenv('SECRET_KEY'))
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = 'TRUE'
 
-ALLOWED_HOSTS = ['*']
-# ALLOWED_HOSTS = ['https://trasia-watches-store.onrender.com']
+# ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = ['https://trasia-watches-store.onrender.com']
 
 
 # Application definition
